@@ -1,0 +1,375 @@
+/* ==========================================================================
+   CSS COMPLETO E REFINADO - Neli Carvalho Novaes Advocacia
+   Foco em Cores Profissionais, Contraste, Hierarquia e Detalhes.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Reset Essencial e Configurações Base Globais
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Opcional: Transição suave para quase tudo (use com moderação) */
+    /* transition: background-color var(--anim-duration-fast) ease, color var(--anim-duration-fast) ease; */
+}
+
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.65; /* Levemente mais espaçado */
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--anim-duration-fast) ease-out, color var(--anim-duration-fast) ease-out;
+}
+
+/* ==========================================================================
+   2. Variáveis CSS (Custom Properties) - Tema Advocacia REFINADO
+   ========================================================================== */
+:root {
+    /* -- Paleta Light Mode (Padrão) -- */
+    --color-background-light: #fdfdfd; /* Branco ligeiramente off-white */
+    --color-text-light: #343a40;      /* Cinza bem escuro (quase preto) */
+    --color-primary-light: #0a2d57;   /* Azul Marinho profundo */
+    --color-primary-darker-light: #061f3c;
+    --color-secondary-light: #5a6775;  /* Cinza médio para textos secundários */
+    --color-accent-light: #c5a773;     /* Dourado/Bronze suave */
+    --color-accent-darker-light: #a1844f;
+    --color-light-bg-light: #f1f3f5;   /* Cinza muito claro para fundos alternativos */
+    --color-white: #ffffff;
+    --color-border-light: #e9ecef;     /* Borda cinza clara */
+    --shadow-color-light: rgba(0, 0, 0, 0.08);
+
+    /* -- Paleta Dark Mode -- */
+    --color-background-dark: #0f172a;  /* Azul/Cinza muito escuro */
+    --color-text-dark: #cbd5e1;        /* Cinza claro para texto */
+    --color-primary-dark-theme: #7dd3fc; /* Azul claro vibrante */
+    --color-primary-darker-dark: #38bdf8;
+    --color-secondary-dark: #94a3b8;   /* Cinza mais claro */
+    --color-accent-dark-theme: #fcd34d; /* Dourado/Amarelo mais vivo */
+    --color-accent-darker-dark: #facc15;
+    --color-light-bg-dark: #1e293b;    /* Fundo alternativo escuro */
+    --color-border-dark: #334155;      /* Borda escura */
+    --shadow-color-dark: rgba(0, 0, 0, 0.25);
+
+    /* -- Seleção Inicial (Light Mode) -- */
+    --color-background: var(--color-background-light);
+    --color-text: var(--color-text-light);
+    --color-primary: var(--color-primary-light);
+    --color-primary-darker: var(--color-primary-darker-light);
+    --color-secondary: var(--color-secondary-light);
+    --color-accent: var(--color-accent-light);
+    --color-accent-darker: var(--color-accent-darker-light);
+    --color-light-bg: var(--color-light-bg-light);
+    --color-border: var(--color-border-light);
+    --shadow-color: var(--shadow-color-light);
+
+    /* -- Escala de Espaçamento Fluido (Mantida) -- */
+    --space-xs: clamp(0.5rem, 1vw + 0.25rem, 0.75rem); --space-sm: clamp(0.75rem, 1.5vw + 0.25rem, 1.25rem); --space-md: clamp(1rem, 2.5vw + 0.5rem, 2rem); --space-lg: clamp(1.5rem, 4vw + 1rem, 3.5rem); --space-xl: clamp(2.5rem, 7vw + 1rem, 5rem); --space-xxl: clamp(3.5rem, 10vw + 1.5rem, 7rem);
+    /* -- Larguras Máximas (Mantidas) -- */
+    --content-max-width-narrow: 68ch; /* Ajustado */
+    --content-max-width-standard: 1160px; /* Ajustado */
+    --container-max-width-full: 1440px; /* Ajustado */
+    /* -- Fontes -- */
+    --font-primary: 'Lato', sans-serif;
+    --font-headings: 'Merriweather', serif;
+
+     /* -- Timings de Animação -- */
+     --anim-duration-fast: 0.25s; --anim-duration-medium: 0.5s; --anim-duration-slow: 0.8s;
+     --anim-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* --- Aplicação Dark Mode --- */
+body.dark-mode,
+body[data-theme="dark"] {
+    --color-background: var(--color-background-dark);
+    --color-text: var(--color-text-dark);
+    --color-primary: var(--color-primary-dark-theme);
+    --color-primary-darker: var(--color-primary-dark-dark);
+    --color-secondary: var(--color-secondary-dark);
+    --color-accent: var(--color-accent-dark-theme);
+    --color-accent-darker: var(--color-accent-darker-dark);
+    --color-light-bg: var(--color-light-bg-dark);
+    --color-border: var(--color-border-dark);
+    --shadow-color: var(--shadow-color-dark);
+}
+/* Preferência do sistema */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-user-theme]) {
+    --color-background: var(--color-background-dark); --color-text: var(--color-text-dark); --color-primary: var(--color-primary-dark-theme); --color-primary-darker: var(--color-primary-dark-dark); --color-secondary: var(--color-secondary-dark); --color-accent: var(--color-accent-dark-theme); --color-accent-darker: var(--color-accent-darker-dark); --color-light-bg: var(--color-light-bg-dark); --color-border: var(--color-border-dark); --shadow-color: var(--shadow-color-dark);
+  }
+}
+
+/* ==========================================================================
+   3. Tipografia Fluida e Estilos de Texto Base REFINADOS
+   ========================================================================== */
+
+h1, .h1-style, h2, .h2-style, h3, .h3-style, h4, .h4-style, h5, .h5-style, h6, .h6-style {
+    font-family: var(--font-headings);
+    color: var(--color-primary);
+    line-height: 1.3;
+    margin-block-end: var(--space-md);
+    font-weight: 700;
+}
+h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:last-child { margin-block-end: 0; }
+
+h1, .h1-style { font-size: clamp(2rem, 4vw + 1rem, 3.8rem); font-weight: 700; line-height: 1.25; } /* Levemente menor */
+h2, .h2-style { font-size: clamp(1.6rem, 3vw + 0.8rem, 2.8rem); font-weight: 700; }
+h3, .h3-style { font-size: clamp(1.25rem, 2vw + 0.7rem, 1.8rem); line-height: 1.4; margin-block-end: var(--space-sm); }
+h4, .h4-style { font-size: clamp(1.1rem, 1.5vw + 0.8rem, 1.4rem); margin-block-end: var(--space-xs); }
+
+p, li { font-family: var(--font-primary); font-size: clamp(0.95rem, 1vw + 0.5rem, 1.1rem); max-width: var(--content-max-width-narrow); margin-block-end: var(--space-sm); color: var(--color-text); }
+p:last-child, li:last-child { margin-block-end: 0; }
+
+strong, b { font-weight: 700; color: inherit; }
+em, i { font-style: italic; color: inherit; }
+
+a { color: var(--color-primary); text-decoration: none; /* Remove sublinhado padrão */ border-bottom: 1px solid transparent; /* Prepara para transição */ padding-bottom: 0.1em; transition: color var(--anim-duration-fast) ease, border-color var(--anim-duration-fast) ease; }
+a:hover, a:focus { color: var(--color-primary-darker); border-bottom-color: currentColor; /* Sublinhado aparece */ outline: none; }
+a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: 2px; border-bottom-color: transparent; /* Esconde sublinhado no foco customizado */ }
+
+.button { display: inline-block; cursor: pointer; text-align: center; text-decoration: none; border: 1px solid transparent; padding: var(--space-sm) var(--space-lg); font-size: clamp(0.9rem, 1vw + 0.5rem, 1.1rem); /* Levemente menor */ font-weight: 700; font-family: var(--font-primary); border-radius: 6px; /* Menos arredondado */ background-color: var(--color-primary); color: var(--color-white); transition: transform var(--anim-duration-fast) ease, background-color var(--anim-duration-fast) ease, border-color var(--anim-duration-fast) ease, box-shadow var(--anim-duration-fast) ease; will-change: transform; }
+.button:hover, .button:focus { background-color: var(--color-primary-darker); transform: translateY(-2px); box-shadow: 0 5px 15px var(--shadow-color); color: var(--color-white); text-decoration: none; outline: none; }
+.button:focus-visible { box-shadow: 0 0 0 3px var(--color-background), 0 0 0 5px var(--color-primary); }
+.button--outline { background-color: transparent; border-color: var(--color-primary); color: var(--color-primary); }
+.button--outline:hover, .button--outline:focus { background-color: var(--color-primary); border-color: var(--color-primary); color: var(--color-white); }
+.button--outline:focus-visible { box-shadow: 0 0 0 3px var(--color-background), 0 0 0 5px var(--color-primary); background-color: transparent; color: var(--color-primary); }
+.button--accent { background-color: var(--color-accent); color: var(--color-primary-darker); border-color: var(--color-accent); }
+.button--accent:hover, .button--accent:focus { background-color: var(--color-accent-darker); border-color: var(--color-accent-darker); color: var(--color-primary-darker); }
+.button--accent:focus-visible { box-shadow: 0 0 0 3px var(--color-background), 0 0 0 5px var(--color-accent); }
+
+/* Classe Highlight para texto */
+.highlight {
+    color: var(--color-accent); /* Dourado/Amarelo */
+    font-family: inherit; /* Ou var(--font-headings) se preferir */
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   4. Layouts Fluidos (Mantido) e Estrutura
+   ========================================================================== */
+.responsive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: var(--space-md); }
+.responsive-flex { display: flex; flex-wrap: wrap; gap: var(--space-md); }
+.responsive-flex > * { flex: 1 1 min(300px, 100%); min-width: min(200px, 100%); }
+.container { width: 100%; max-width: var(--container-max-width-full); margin-inline: auto; padding-inline: var(--space-md); }
+.content-wrapper { width: 100%; max-width: var(--content-max-width-standard); margin-inline: auto; }
+.section { padding-block: var(--space-xl); position: relative; overflow: hidden; }
+.section--narrow { padding-block: var(--space-lg); }
+.section--light-bg { background-color: var(--color-light-bg); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); /* Adiciona bordas sutis */ }
+.section--dark-bg { background-color: var(--color-text); color: var(--color-white); }
+.section--dark-bg h1, .section--dark-bg h2, .section--dark-bg h3 { color: var(--color-white); }
+.section--dark-bg p, .section--dark-bg li { color: rgba(255, 255, 255, 0.9); }
+.section--dark-bg a { color: var(--color-accent); }
+.section--dark-bg a:hover, .section--dark-bg a:focus { color: var(--color-white); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+
+/* Títulos de Seção (Estilo unificado) */
+.section-title { /* Reutiliza H2 por padrão */ text-align: center; margin-block-end: var(--space-sm); }
+.section-title::after { /* Linha decorativa opcional */ content: ''; display: block; width: 60px; height: 3px; background-color: var(--color-accent); margin: var(--space-sm) auto 0; border-radius: 3px; }
+.section-subtitle { text-align: center; font-size: clamp(1rem, 1.5vw + 0.5rem, 1.3rem); color: var(--color-secondary); margin-block-start: calc(-1 * var(--space-md) + var(--space-xs)); /* Puxa para perto do título */ margin-block-end: var(--space-lg); max-width: var(--content-max-width-narrow); margin-inline: auto; }
+
+/* ==========================================================================
+   5. Mídia Responsiva (Mantido)
+   ========================================================================== */
+img, video, svg, picture { max-width: 100%; height: auto; vertical-align: middle; }
+.responsive-iframe-container { position: relative; overflow: hidden; width: 100%; padding-top: 56.25%; }
+.responsive-iframe-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: 0; }
+
+/* ==========================================================================
+   6. Cabeçalho (Header) REFINADO
+   ========================================================================== */
+.site-header {
+    background-color: hsla(0, 0%, 100%, 0.85); /* Branco com alpha */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-block-end: 1px solid var(--color-border); /* Propriedade lógica */
+    padding-block: var(--space-sm);
+    position: sticky; top: 0; z-index: 100;
+    transition: background-color var(--anim-duration-fast) ease-out, box-shadow var(--anim-duration-fast) ease-out;
+}
+body.scrolled .site-header {
+     background-color: hsla(0, 0%, 100%, 0.98);
+     box-shadow: 0 4px 15px var(--shadow-color);
+}
+/* Dark mode para header */
+body.dark-mode .site-header, body[data-theme="dark"] .site-header {
+    background-color: hsla(222, 24%, 15%, 0.85); /* Cor de fundo dark com alpha */
+    border-block-end-color: var(--color-border-dark);
+}
+body.dark-mode.scrolled .site-header, body[data-theme="dark"].scrolled .site-header {
+     background-color: hsla(222, 24%, 15%, 0.98);
+     box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.header-container { display: flex; justify-content: space-between; align-items: center; gap: var(--space-md); }
+.logo a { font-family: var(--font-headings); font-weight: 700; font-size: clamp(1.2rem, 2vw + 0.5rem, 1.6rem); color: var(--color-primary); text-decoration: none; line-height: 1; border-bottom: none; }
+.logo a:hover, .logo a:focus { border-bottom: none; color: var(--color-primary-darker); }
+.logo .logo-subtitle { display: block; font-size: 0.6em; font-weight: 400; color: var(--color-secondary); letter-spacing: 1px; margin-top: -0.2em; }
+
+.main-nav { display: none; /* Começa escondido, JS controla em mobile */ }
+@media (min-width: 769px) { .main-nav { display: block; } } /* Mostra em desktop */
+.main-nav ul { list-style: none; display: flex; gap: var(--space-md); }
+.main-nav a { text-decoration: none; color: var(--color-text); font-weight: 700; font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem); padding-block: var(--space-xs); position: relative; overflow: hidden; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent; transition: color var(--anim-duration-fast) ease, border-color var(--anim-duration-fast) ease; }
+.main-nav a:hover, .main-nav a:focus, .main-nav a.active { /* Adiciona classe active se quiser destacar página atual */ color: var(--color-primary); border-bottom-color: var(--color-accent); }
+.main-nav a:focus-visible { outline: none; background-color: transparent; } /* Remove foco customizado daqui */
+
+.header-actions { display: flex; align-items: center; gap: var(--space-sm); }
+.dark-mode-button { background: none; border: none; cursor: pointer; padding: 0.3rem; font-size: 1.2rem; color: var(--color-text); line-height: 1; position: relative; width: 1.5em; height: 1.5em; overflow: hidden; }
+.dark-mode-button .icon-moon, .dark-mode-button .icon-sun { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: opacity var(--anim-duration-fast) ease-out, transform var(--anim-duration-fast) ease-out; }
+body[data-theme="light"] .dark-mode-button .icon-sun { opacity: 0; transform: translate(-50%, -50%) rotate(-90deg) scale(0.5); }
+body[data-theme="dark"] .dark-mode-button .icon-moon { opacity: 0; transform: translate(-50%, -50%) rotate(90deg) scale(0.5); }
+
+.menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--color-primary); cursor: pointer; padding: 0.2rem; line-height: 1; z-index: 101; /* Acima do nav */ }
+@media (max-width: 768px) { .menu-toggle { display: block; } }
+
+/* Estilos para Menu Mobile (Controlado por JS adicionando/removendo .is-open) */
+@media (max-width: 768px) {
+    .main-nav { display: flex; /* Muda para flex para centralizar */ justify-content: center; align-items: center; position: fixed; /* Fixo na tela */ top: 0; left: 0; width: 100%; height: 100vh; /* Altura total */ height: 100dvh; background-color: hsla(0, 0%, 100%, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transform: translateX(100%); /* Começa fora da tela */ transition: transform var(--anim-duration-medium) ease-in-out; z-index: 100; /* Abaixo do botão de fechar */ padding: var(--space-xl); }
+    body.dark-mode .main-nav, body[data-theme="dark"] .main-nav { background-color: hsla(222, 24%, 15%, 0.95); }
+    .main-nav.is-open { transform: translateX(0); } /* Entra na tela */
+    .main-nav ul { flex-direction: column; gap: var(--space-md); text-align: center; }
+    .main-nav a { font-size: clamp(1.2rem, 5vw, 1.8rem); /* Fonte maior no mobile */ border-bottom: none; padding: var(--space-sm); }
+    .main-nav a:hover, .main-nav a:focus { color: var(--color-accent); background-color: rgba(0,0,0,0.05); border-radius: 4px; }
+    body.dark-mode .main-nav a:hover, body.dark-mode .main-nav a:focus { background-color: rgba(255,255,255,0.08); }
+    body.mobile-menu-open { overflow: hidden; } /* Trava scroll */
+}
+
+
+/* ==========================================================================
+   7. Landing Page - Hero Section REFINADO
+   ========================================================================== */
+.hero-section { min-height: calc(100vh - 70px); min-height: calc(100dvh - 70px); /* Ajuste baseado na altura real do header */ background: linear-gradient(140deg, var(--color-primary-darker) 0%, var(--color-primary) 60%, var(--color-light-bg) 100%); color: var(--color-white); }
+.hero-background { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><path fill="%23fff" fill-opacity="0.04" d="M25 0 L50 25 L25 50 L0 25 Z M10 10 L40 10 L40 40 L10 40 Z"></path></svg>'); opacity: 0.6; animation: subtle-bg-shift 80s linear infinite; }
+.hero-content-container { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-lg); text-align: left; }
+.hero-text { flex: 1 1 min(450px, 100%); opacity: 0; transform: translateX(-30px); will-change: transform, opacity; }
+.hero-visual { flex: 1 1 min(300px, 80%); display: flex; justify-content: center; align-items: center; opacity: 0; transform: scale(0.8); will-change: transform, opacity; }
+.hero-text.animate-on-load { animation: slide-in-fade var(--anim-duration-slow) var(--anim-easing) 0.2s forwards; }
+.hero-visual.animate-on-load { animation: scale-up-fade var(--anim-duration-slow) var(--anim-easing) 0.4s forwards; }
+.hero-title { font-size: clamp(2.2rem, 4.5vw + 1rem, 4.2rem); /* Tamanho refinado */ color: var(--color-white); margin-block-end: var(--space-sm); line-height: 1.2; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+.hero-title .highlight { color: var(--color-accent); }
+.hero-subtitle { font-size: clamp(1.1rem, 1.8vw + 0.5rem, 1.5rem); /* Tamanho refinado */ color: rgba(255, 255, 255, 0.9); max-width: 55ch; margin-block-end: var(--space-lg); font-weight: 300; font-family: var(--font-primary); }
+.hero-cta { padding: var(--space-md) var(--space-xl); font-size: clamp(1rem, 1.2vw + 0.5rem, 1.2rem); background: var(--color-accent); color: var(--color-primary-darker); }
+.hero-cta:hover, .hero-cta:focus { background: var(--color-accent-darker); color: var(--color-primary-darker); box-shadow: 0 6px 15px rgba(197, 167, 115, 0.4); }
+.justice-scale { width: clamp(120px, 25vmin, 300px); height: auto; color: rgba(255, 255, 255, 0.6); filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2)); }
+@media (max-width: 768px) { .hero-content-container { text-align: center; flex-direction: column; } .hero-text { text-align: center; } .hero-subtitle { margin-inline: auto; } .hero-visual { order: -1; margin-block-end: var(--space-md); } }
+
+
+/* ==========================================================================
+   8. Landing Page - Seções de Conteúdo REFINADAS
+   ========================================================================== */
+
+/* --- Animação Geral de Scroll --- */
+.reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity var(--anim-duration-medium) ease-out, transform var(--anim-duration-medium) var(--anim-easing); will-change: opacity, transform; }
+.reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+/* Adicione classes de delay no HTML: delay-1, delay-2, etc. */
+.reveal-on-scroll.delay-1 { transition-delay: 0.1s; } .reveal-on-scroll.delay-2 { transition-delay: 0.2s; } .reveal-on-scroll.delay-3 { transition-delay: 0.3s; } .reveal-on-scroll.delay-4 { transition-delay: 0.4s; } .reveal-on-scroll.delay-5 { transition-delay: 0.5s; }
+
+/* --- Seção Áreas de Atuação --- */
+.areas-section { /* Usa .section--light-bg */ }
+.practice-areas-grid { /* Reutiliza .responsive-grid */ margin-top: var(--space-lg); }
+.practice-card { background-color: var(--color-background); padding: var(--space-lg); border-radius: 8px; box-shadow: 0 5px 20px var(--shadow-color); border: 1px solid var(--color-border); text-align: center; transition: transform var(--anim-duration-fast) ease, box-shadow var(--anim-duration-fast) ease, border-color var(--anim-duration-fast) ease; position: relative; overflow: hidden; opacity: 0; transform: translateY(30px); will-change: transform, opacity; }
+.reveal-on-scroll.is-visible .practice-card { opacity: 1; transform: translateY(0); transition-delay: calc(var(--card-index, 0) * 0.1s); } /* Usar JS para setar --card-index ou :nth-child */
+.practice-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px var(--shadow-color); border-color: var(--color-accent); }
+.card-icon { font-size: clamp(2.8rem, 6vw, 3.8rem); color: var(--color-accent); margin-block-end: var(--space-md); line-height: 1; transition: transform var(--anim-duration-fast) ease; }
+.practice-card:hover .card-icon { transform: scale(1.1); }
+.card-title { color: var(--color-primary); font-size: clamp(1.2rem, 2vw + 0.7rem, 1.6rem); margin-block-end: var(--space-sm); }
+.card-description { color: var(--color-secondary); font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem); max-width: none; }
+
+/* --- Seção Sobre Nós --- */
+.about-section { background-color: var(--color-background); /* Garante fundo padrão */ }
+.about-container { gap: var(--space-xl); align-items: center; }
+.about-image { flex: 1 1 min(300px, 40%); text-align: center; }
+.about-image img { border-radius: 50%; /* Foto redonda */ box-shadow: 0 10px 35px var(--shadow-color); aspect-ratio: 1 / 1; object-fit: cover; max-width: 350px; margin-inline: auto; border: 4px solid var(--color-accent); /* Borda dourada */ }
+.about-text { flex: 1 1 55%; }
+.about-text .section-title { text-align: left; margin-block-end: var(--space-md); }
+.about-text p { max-width: none; margin-block-end: var(--space-md); }
+.about-text strong { color: var(--color-primary); }
+
+/* --- Seção Contato --- */
+.contact-section { /* Usa .section--light-bg */ }
+.contact-container-internal { gap: var(--space-xl); align-items: flex-start; }
+.contact-info { flex: 1 1 min(300px, 45%); }
+.contact-form-wrapper { flex: 1 1 min(350px, 50%); }
+.contact-info h3, .contact-form-wrapper h3 { font-family: var(--font-headings); font-size: clamp(1.4rem, 2.2vw + 0.8rem, 2rem); color: var(--color-primary); margin-block-end: var(--space-md); border-bottom: 1px solid var(--color-border); padding-block-end: var(--space-sm); }
+.contact-info p { display: flex; align-items: flex-start; gap: var(--space-sm); margin-block-end: var(--space-md); font-size: clamp(1rem, 1.1vw + 0.5rem, 1.15rem); max-width: none; line-height: 1.5; }
+.contact-info .icon { color: var(--color-accent); font-size: 1.2em; margin-top: 0.05em; width: 1.5em; text-align: center; flex-shrink: 0; }
+.contact-info a { text-decoration: none; color: var(--color-primary); border-bottom: 1px solid transparent; }
+.contact-info a:hover, .contact-info a:focus { color: var(--color-primary-darker); border-bottom-color: currentColor; }
+/* Estilos do Formulário */
+.contact-form .form-group { margin-bottom: var(--space-md); }
+.contact-form label { display: block; margin-bottom: var(--space-xs); font-weight: 700; font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem); color: var(--color-primary); }
+.contact-form input[type="text"], .contact-form input[type="email"], .contact-form input[type="tel"], .contact-form textarea { width: 100%; padding: var(--space-sm); border: 1px solid var(--color-border); border-radius: 6px; font-family: var(--font-primary); font-size: clamp(0.95rem, 1vw + 0.5rem, 1.05rem); line-height: 1.5; background-color: var(--color-background); color: var(--color-text); transition: border-color var(--anim-duration-fast) ease, box-shadow var(--anim-duration-fast) ease; }
+.contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form input[type="tel"]:focus, .contact-form textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-light); } /* Ajusta sombra de foco */
+body.dark-mode .contact-form input[type="text"]:focus, body.dark-mode .contact-form input[type="email"]:focus, body.dark-mode .contact-form input[type="tel"]:focus, body.dark-mode .contact-form textarea:focus { box-shadow: 0 0 0 3px var(--color-primary-dark-theme); } /* Foco no dark mode */
+.contact-form textarea { resize: vertical; min-height: 120px; }
+.contact-form .form-submit { text-align: right; margin-top: var(--space-lg); }
+.contact-form .error-message { color: #e53e3e; font-size: 0.85rem; margin-top: var(--space-xs); display: block; min-height: 1em; font-weight: 600; }
+body.dark-mode .contact-form .error-message { color: #fc8181; }
+.contact-form .form-status { margin-top: var(--space-sm); font-weight: 700; min-height: 1.5em; text-align: right; }
+.contact-form .form-status.success { color: #38a169; } /* Verde sucesso */
+.contact-form .form-status.error { color: #e53e3e; } /* Vermelho erro */
+body.dark-mode .contact-form .form-status.success { color: #68d391; }
+body.dark-mode .contact-form .form-status.error { color: #fc8181; }
+
+
+/* ==========================================================================
+   9. Rodapé (Footer) REFINADO
+   ========================================================================== */
+.site-footer { /* Usa .section--narrow */
+    background-color: var(--color-primary-darker); /* Azul bem escuro */
+    color: rgba(255, 255, 255, 0.75); /* Branco suave */
+    border-top: 3px solid var(--color-accent); /* Linha dourada no topo */
+}
+.footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: var(--space-lg); text-align: center; }
+@media (min-width: 768px) { .footer-container { text-align: left; } }
+.footer-info h4, .footer-links h4 { font-family: var(--font-headings); color: var(--color-white); font-size: 1.1rem; margin-block-end: var(--space-sm); }
+.footer-info p { font-size: 0.9rem; margin-block-end: var(--space-xs); max-width: none; color: inherit; line-height: 1.5; }
+.footer-links ul { list-style: none; padding: 0; }
+.footer-links li { margin-block-end: var(--space-xs); }
+.footer-links a { color: rgba(255, 255, 255, 0.75); text-decoration: none; font-size: 0.9rem; border: none; padding: 0; }
+.footer-links a:hover, .footer-links a:focus { color: var(--color-white); text-decoration: underline; border: none; }
+.footer-links a:focus-visible { outline-color: var(--color-accent); background: none; }
+.footer-copy { grid-column: 1 / -1; margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; text-align: center; }
+.footer-copy a { color: rgba(255, 255, 255, 0.75); }
+
+/* ==========================================================================
+   10. Estilos Páginas Internas (Termos, Privacidade - Herdado e Refinado)
+   ========================================================================== */
+.terms-container, .privacy-container { padding-block: var(--space-lg) var(--space-xl); background-color: var(--color-background); color: var(--color-text); width: 100%; }
+/* Estilos de Títulos, Parágrafos, Listas herdam bem, mas podemos refinar H1 */
+.terms-container h1, .privacy-container h1 { font-family: var(--font-headings); font-size: clamp(1.8rem, 4vw + 1rem, 3rem); color: var(--color-primary); text-align: center; margin-bottom: var(--space-sm); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-accent); line-height: 1.3; }
+.terms-container h2, .privacy-container h2 { font-family: var(--font-headings); font-size: clamp(1.4rem, 2.8vw + 0.7rem, 2rem); color: var(--color-primary); margin-bottom: var(--space-md); padding-bottom: var(--space-xs); border-bottom: 1px solid var(--color-border); text-align: left; }
+.terms-container p, .privacy-container p { font-size: clamp(0.95rem, 1vw + 0.55rem, 1.1rem); color: var(--color-text); line-height: 1.7; margin-bottom: var(--space-sm); max-width: var(--content-max-width-narrow, 70ch); }
+.terms-container ul, .terms-container ol, .privacy-container ul, .privacy-container ol { margin-block-end: var(--space-sm); padding-inline-start: var(--space-lg); max-width: var(--content-max-width-narrow, 70ch); list-style-position: outside; }
+.terms-container li, .privacy-container li { margin-bottom: var(--space-xs); color: var(--color-text); font-size: inherit; line-height: 1.7; padding-inline-start: var(--space-xs); }
+.terms-container ul li::marker, .privacy-container ul li::marker { color: var(--color-primary); }
+.terms-container > *:last-child, .privacy-container > *:last-child { margin-bottom: 0; }
+.terms-container + .footer, .privacy-container + .footer { margin-top: var(--space-xl); }
+
+
+/* ==========================================================================
+   11. Media Queries para Casos Extremos (Mantido e Adaptado)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; animation-delay: -0.01ms !important; } .animate-on-load, .reveal-on-scroll, .justice-scale, .practice-card, .about-image img, .button:hover, .hero-background { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; } }
+@media (max-width: 360px) { html { font-size: 87.5%; } .hide-on-small-screen { display: none !important; } :root { --space-sm: clamp(0.5rem, 1vw + 0.25rem, 0.75rem); --space-md: clamp(0.75rem, 1.5vw + 0.25rem, 1rem); --space-lg: clamp(1rem, 2.5vw + 0.5rem, 1.5rem); --space-xl: clamp(1.2rem, 4vw + 0.8rem, 2rem); --space-xxl: clamp(1.8rem, 6vw + 1rem, 3rem); } .container, .content-wrapper { padding-inline: var(--space-sm); } .terms-container, .privacy-container, .contact-container { padding-block: var(--space-md) var(--space-lg); } h1, .h1-style { font-size: clamp(1.8rem, 7vw + 1rem, 3rem); } h2, .h2-style { font-size: clamp(1.4rem, 5vw + 0.8rem, 2.2rem); } .hero-title { font-size: clamp(2rem, 10vw + 1rem, 4rem); } }
+
+
+/* ==========================================================================
+   12. Keyframes de Animação (Mantido)
+   ========================================================================== */
+@keyframes subtle-bg-shift { from { background-position: 0 0; } to { background-position: 100px 100px; } }
+@keyframes slide-in-fade { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes scale-up-fade { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+/* Adicione outros keyframes definidos anteriormente (slow-pan, subtle-sparkle, etc.) se estiver usando os elementos que os requerem */
